@@ -10,9 +10,10 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
+      - checkout
       - run: echo hello
       - run: pwd
-      # - run: ./webhook.sh
+      - run: ./webhook.sh
   print_world:
     docker:
       - image: cimg/node:13.8.0
