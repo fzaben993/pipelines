@@ -10,7 +10,7 @@ commands:
           name: "Print the pipeline ID"
           command: |
            echo "Pipeline ID << parameters.pipeline_id >>"
-           exit 1
+          #  exit 1
 
       - run: 
           name: "Send a message to the webhook"
