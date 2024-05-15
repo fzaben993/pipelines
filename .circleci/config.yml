@@ -7,7 +7,7 @@ commands:
           name: "SSH to the host"
           command: |
             echo "SSH to the host"
-            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa $SSH_USER@$SSH_HOST "ls -la /home/$SSH_USER"
             # exit 1
   print_pipeline_id:
     parameters:
