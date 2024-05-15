@@ -12,13 +12,14 @@ jobs:
     steps:
       - checkout
       - run: echo hello
-      - run: pwd
-      - run: ./webhook.sh
+      - run: ./webhook.sh '{"text":"hello"}'
   print_world:
     docker:
       - image: cimg/node:13.8.0
     steps:
       - run: echo world
+      - run: ./webhook.sh '{"text":"world"}'
+
 workflows:
   # Name the workflow "welcome"
   welcome:
