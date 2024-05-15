@@ -19,7 +19,7 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - print_pipeline_id:
-          pipeline_id: << pipeline.id >>
+          pipeline_id: "test"
 
 
 
