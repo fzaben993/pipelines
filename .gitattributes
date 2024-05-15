@@ -1,0 +1,12 @@
+* text=auto
+
+*.js        eol=lf
+*.jsx       eol=lf  
+*.json      eol=lf
+*.md        eol=lf
+*.yaml      eol=lf
+*.yml       eol=lf
+*.json      eol=lf
+*.sh        eol=lf
+*Dockerfile eol=lf
+.git*       eol=lf
