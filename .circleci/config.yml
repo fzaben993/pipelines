@@ -11,6 +11,7 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - run: echo hello
+      - run: ./webhook.sh
   print_world:
     docker:
       - image: cimg/node:13.8.0
