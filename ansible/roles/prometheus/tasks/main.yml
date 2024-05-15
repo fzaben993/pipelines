@@ -1,0 +1,12 @@
+---
+- name: Update apt repositories
+  apt:
+    update_cache: yes
+- name: Create a prometheus user
+  shell: |
+    useradd --no-create-home --shell /bin/false prometheus
+    mkdir /etc/prometheus
+    mkdir /var/lib/prometheus
+    chown prometheus:prometheus /etc/prometheus
+    chown prometheus:prometheus /var/lib/prometheus
+  

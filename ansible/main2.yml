@@ -1,0 +1,5 @@
+---
+- name: Print
+  hosts: localhost
+  roles:
+    - role: print
