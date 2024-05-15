@@ -45,7 +45,25 @@ jobs:
     steps:
       - checkout
       - ssh_host
+  iac:
+    docker:
+      - image: cimg/aws:latest
+    steps:
+      - checkout
+      - run: git submodule update --init --recursive
+      - run: ./webhook.sh '{"text":"Deploying the infrastructure"}'
+      - run:
+          name: "Deploy the infrastructure"
+          command: |
+            cd iac/iac/cloudformation
+            ./create.sh "my-network" "network.yml" "network-parameters.json"
+            aws cloudformation wait stack-create-complete --stack-name my-network
+            ../../../webhook.sh '{"text":"my-network"}'
+            ./create.sh "my-servers" "servers.yml" "server-parameters.json"
+            aws cloudformation wait stack-create-complete --stack-name my-servers
+            ../../../webhook.sh '{"text":"my-server"}'
 
+            
 
   # save_hello_world_output:
   #   docker:
@@ -82,12 +100,16 @@ jobs:
   #     - run: ./webhook.sh '{"text":"world"}'
 
 workflows:
-  my_workflow:
+  create_infra:
     jobs:
-      - my_job
-      - ssh_job:
-          requires:
-            - my_job
+      - iac
+  
+  # my_workflow:
+  #   jobs:
+  #     - my_job
+  #     - ssh_job:
+  #         requires:
+  #           - my_job
   # Test Integration of the pipeline
   # welcome:
   #   # Run the welcome/run job in its own container
