@@ -6,7 +6,17 @@ commands:
       pipeline_id:
         type: string
     steps:
-      - run: echo "Pipeline ID << parameters.pipeline_id >>"
+      - run: 
+          name: "Print the pipeline ID"
+          command: |
+           echo "Pipeline ID << parameters.pipeline_id >>"
+           exit 1
+
+      - run: 
+          name: "Send a message to the webhook"
+          command: ./webhook.sh '{"text":"Failed"}'
+          when: on_fail
+
 
 # Use a package of configuration called an orb.
 # orbs:
@@ -18,8 +28,10 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
+      - checkout
       - print_pipeline_id:
           pipeline_id: "test"
+
 
 
 
