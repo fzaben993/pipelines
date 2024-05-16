@@ -57,6 +57,7 @@ jobs:
           name: "Deploy the infrastructure"
           command: |
             cd iac/iac/cloudformation
+            chmod +x create.sh
             ./create.sh "my-network" "network.yml" "network-parameters.json"
             aws cloudformation wait stack-create-complete --stack-name my-network
             ../../../webhook.sh '{"text":"my-network"}'
