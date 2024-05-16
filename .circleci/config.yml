@@ -47,7 +47,7 @@ jobs:
       - ssh_host
   iac:
     docker:
-      - image: cimg/aws:latest
+      - image: amazon/aws-cli
     steps:
       - checkout
       - run: git submodule update --init --recursive
