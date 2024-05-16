@@ -53,32 +53,32 @@ jobs:
       - run: git submodule update --init --recursive
       - run: ./webhook.sh '{"text":"Deploying the infrastructure"}'
       - run: sudo apt-get update && sudo apt-get install -y awscli
-      - run:
-          name: "Deploy the infrastructure"
-          command: |
-            cd iac/iac/cloudformation
-            chmod +x create.sh
-            ./create.sh "my-network" "network.yml" "network-parameters.json"
-            echo "Waiting for the network stack to be created"
-            aws cloudformation wait stack-create-complete --stack-name my-network
-            echo "Network stack created successfully"
-            ../../../webhook.sh '{"text":"my-network"}'
-            ./create.sh "my-servers" "servers.yml" "server-parameters.json"
-            echo "Waiting for the servers stack to be created"
-            aws cloudformation wait stack-create-complete --stack-name my-servers
-            echo "Servers stack created successfully"
-            ../../../webhook.sh '{"text":"my-server"}'
-      - run:
-          name: "Destroy the infrastructure"
-          command: |
-            echo "Waiting for the servers stack to be destroyed"
-            aws cloudformation delete-stack --stack-name my-servers
-            aws cloudformation wait stack-delete-complete --stack-name my-servers
-            echo "Servers stack destroyed successfully"
-            echo "Waiting for the network stack to be destroyed"
-            aws cloudformation delete-stack --stack-name my-network
-            aws cloudformation wait stack-delete-complete --stack-name my-network
-            echo "Network stack destroyed successfully"
+      # - run:
+      #     name: "Deploy the infrastructure"
+      #     command: |
+      #       cd iac/iac/cloudformation
+      #       chmod +x create.sh
+      #       ./create.sh "my-network" "network.yml" "network-parameters.json"
+      #       echo "Waiting for the network stack to be created"
+      #       aws cloudformation wait stack-create-complete --stack-name my-network
+      #       echo "Network stack created successfully"
+      #       ../../../webhook.sh '{"text":"my-network"}'
+      #       ./create.sh "my-servers" "servers.yml" "server-parameters.json"
+      #       echo "Waiting for the servers stack to be created"
+      #       aws cloudformation wait stack-create-complete --stack-name my-servers
+      #       echo "Servers stack created successfully"
+      #       ../../../webhook.sh '{"text":"my-server"}'
+      # - run:
+      #     name: "Destroy the infrastructure"
+      #     command: |
+      #       echo "Waiting for the servers stack to be destroyed"
+      #       aws cloudformation delete-stack --stack-name my-servers
+      #       aws cloudformation wait stack-delete-complete --stack-name my-servers
+      #       echo "Servers stack destroyed successfully"
+      #       echo "Waiting for the network stack to be destroyed"
+      #       aws cloudformation delete-stack --stack-name my-network
+      #       aws cloudformation wait stack-delete-complete --stack-name my-network
+      #       echo "Network stack destroyed successfully"
             
 
             
