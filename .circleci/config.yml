@@ -47,11 +47,12 @@ jobs:
       - ssh_host
   iac:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
       - checkout
       - run: git submodule update --init --recursive
       - run: ./webhook.sh '{"text":"Deploying the infrastructure"}'
+      - run: sudo apt-get update && sudo apt-get install -y awscli
       - run:
           name: "Deploy the infrastructure"
           command: |
