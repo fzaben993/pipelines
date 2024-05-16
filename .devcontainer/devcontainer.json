@@ -3,10 +3,7 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-        // Path is relative to the devcontainer.json file.
-        "dockerfile": "Dockerfile"
-    },
+    "image": "mcr.microsoft.com/devcontainers/base:noble",
 	"mounts": [
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/root/.aws,type=bind,consistency=cached",
@@ -14,13 +11,26 @@
 	],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features":{
+		"ghcr.io/devcontainers/features/aws-cli:1": {
+			"version": "latest"
+	  	},
+	   "ghcr.io/devcontainers/features/terraform:1": {
+			"version": "latest"
+	   },
+	   "ghcr.io/devcontainers-contrib/features/ansible": {
+			"version": "latest"
+	   },
+	   "ghcr.io/hspaans/devcontainer-features/ansible-lint": {
+			"version": "latest"
+	   }
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": ".devcontainer/install.sh"
+	// "postCreateCommand": ""
 
 	// Configure tool-specific properties.
 	// "customizations": {},
